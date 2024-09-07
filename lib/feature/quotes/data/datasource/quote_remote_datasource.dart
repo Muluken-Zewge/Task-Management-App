@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:task_list/core/utils/app_url.dart';
 import '../model/quote_model.dart';
 
 abstract class QuoteRemoteDataSource {
@@ -14,7 +15,7 @@ class QuoteRemoteDataSourceImpl implements QuoteRemoteDataSource {
   @override
   Future<QuoteModel> fetchRandomQuote() async {
     final response =
-        await client.get(Uri.parse('https://api.quotable.io/quotes/random'));
+        await client.get(Uri.parse('${AppUrl.quotesBaseUrl}/quotes/random'));
 
     if (response.statusCode == 200) {
       final List<dynamic> quotesJson = json.decode(response.body);
